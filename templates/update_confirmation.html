@@ -1,0 +1,29 @@
+<!-- templates/update_confirmation.html -->
+{% extends "base.html" %}
+
+{% block title %}Update Confirmation{% endblock %}
+
+{% block content %}
+<div class="result-container">
+    <h1>Record Updated Successfully!</h1>
+    <p>The winning numbers for <strong>{{ record[0].strftime('%Y-%m-%d') }}</strong> have been updated.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Numbers</th>
+                <th>Updated At</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ record[0].strftime('%Y-%m-%d') }}</td>
+                <td>{{ record[1] }}</td>
+                <td>{{ record[2].strftime('%Y-%m-%d %H:%M:%S') }}</td>
+            </tr>
+        </tbody>
+    </table>
+    <a href="{{ url_for('update_records') }}" class="btn btn-primary">Back to Records</a>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+{% endblock %}

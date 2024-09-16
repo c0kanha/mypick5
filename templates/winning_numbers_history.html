@@ -1,0 +1,27 @@
+<!-- templates/winning_numbers_history.html -->
+{% extends "base.html" %}
+
+{% block title %}Winning Numbers History{% endblock %}
+
+{% block content %}
+<div class="result-container">
+    <h1>Winning Numbers History</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Numbers</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record[0].strftime('%Y-%m-%d') }}</td>
+                <td>{{ record[1] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+{% endblock %}

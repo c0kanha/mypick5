@@ -1,0 +1,69 @@
+<!-- templates/generate_random_numbers_result.html -->
+{% extends "base.html" %}
+
+{% block title %}Random Numbers Generated{% endblock %}
+
+{% block content %}
+<div class="result-container">
+    <h1>Your Generated Numbers</h1>
+    <p>Here are your 5 random numbers:</p>
+    <ul class="random-numbers-list">
+        {% for num in random_numbers %}
+            <li>{{ num }}</li>
+        {% endfor %}
+    </ul>
+    
+    <!-- Top 5 Most Frequent Numbers -->
+    <div class="statistics-section">
+        <h2>Top 5 Most Frequent Numbers</h2>
+        {% if top_numbers %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Frequency</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for number, frequency in top_numbers %}
+                <tr>
+                    <td>{{ number }}</td>
+                    <td>{{ frequency }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No data available to display Top 5 Most Frequent Numbers.</p>
+        {% endif %}
+    </div>
+    
+    <!-- Bottom 5 Least Frequent Numbers -->
+    <div class="statistics-section">
+        <h2>Bottom 5 Least Frequent Numbers</h2>
+        {% if bottom_numbers %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Frequency</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for number, frequency in bottom_numbers %}
+                <tr>
+                    <td>{{ number }}</td>
+                    <td>{{ frequency }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No data available to display Bottom 5 Least Frequent Numbers.</p>
+        {% endif %}
+    </div>
+    
+    <a href="{{ url_for('generate_random_numbers') }}" class="btn btn-primary">Generate Again</a>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+{% endblock %}

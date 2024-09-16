@@ -1,0 +1,31 @@
+<!-- templates/most_frequent.html -->
+{% extends "base.html" %}
+
+{% block title %}Top 5 Most Frequent Numbers{% endblock %}
+
+{% block content %}
+<div class="result-container">
+    <h1>Top 5 Most Frequent Numbers</h1>
+    {% if top_numbers %}
+    <table>
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Frequency</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for number, frequency in top_numbers %}
+            <tr>
+                <td>{{ number }}</td>
+                <td>{{ frequency }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No data available to display Top 5 Most Frequent Numbers.</p>
+    {% endif %}
+    <a href="{{ url_for('stats') }}" class="btn btn-secondary">Back to Statistics</a>
+</div>
+{% endblock %}

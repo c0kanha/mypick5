@@ -1,0 +1,23 @@
+<!-- templates/statistics.html -->
+{% extends "base.html" %}
+
+{% block title %}Statistics{% endblock %}
+
+{% block content %}
+<div class="result-container">
+    <h1>Statistics</h1>
+    <div class="cards-container">
+        <div class="card">
+            <h2>Top 5 Most Frequent Numbers</h2>
+            <p>View the five numbers that have been drawn most frequently.</p>
+            <a href="{{ url_for('most_frequent') }}" class="btn btn-primary">View Top 5</a>
+        </div>
+        <div class="card">
+            <h2>Bottom 5 Least Frequent Numbers</h2>
+            <p>View the five numbers that have been drawn least frequently.</p>
+            <a href="{{ url_for('least_frequent') }}" class="btn btn-primary">View Bottom 5</a>
+        </div>
+    </div>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+{% endblock %}

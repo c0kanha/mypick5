@@ -1,0 +1,31 @@
+<!-- templates/update_records.html -->
+{% extends "base.html" %}
+
+{% block title %}Update Records{% endblock %}
+
+{% block content %}
+<div class="result-container">
+    <h1>Update Winning Number Records</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Numbers</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for record in records %}
+            <tr>
+                <td>{{ record[0].strftime('%Y-%m-%d') }}</td>
+                <td>{{ record[1] }}</td>
+                <td>
+                    <a href="{{ url_for('edit_record', record_date=record[0].strftime('%Y-%m-%d')) }}" class="btn btn-edit">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+</div>
+{% endblock %}

@@ -1,0 +1,72 @@
+<!-- templates/exclude_numbers_step3.html -->
+{% extends "base.html" %}
+
+{% block title %}Include Top Frequent Numbers{% endblock %}
+
+{% block content %}
+<div class="result-container">
+    <h1>Include Top Frequent Numbers</h1>
+    <form method="POST">
+        <fieldset>
+            <legend>Select Top N Frequent Numbers to Include</legend>
+            <div class="form-group">
+                <label for="top_n">Number of Top Frequent Numbers to Include:</label>
+                <input type="number" id="top_n" name="top_n" min="0" max="5" value="0" required>
+            </div>
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Generate Numbers</button>
+    </form>
+    
+    <!-- Top 5 Most Frequent Numbers -->
+    <div class="statistics-section">
+        <h2>Top 5 Most Frequent Numbers</h2>
+        {% if top_five %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Frequency</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for number, frequency in top_five %}
+                <tr>
+                    <td>{{ number }}</td>
+                    <td>{{ frequency }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No data available to display Top 5 Most Frequent Numbers.</p>
+        {% endif %}
+    </div>
+    
+    <!-- Bottom 5 Least Frequent Numbers -->
+    <div class="statistics-section">
+        <h2>Bottom 5 Least Frequent Numbers</h2>
+        {% if bottom_five %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Number</th>
+                    <th>Frequency</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for number, frequency in bottom_five %}
+                <tr>
+                    <td>{{ number }}</td>
+                    <td>{{ frequency }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No data available to display Bottom 5 Least Frequent Numbers.</p>
+        {% endif %}
+    </div>
+    
+    <a href="{{ url_for('exclude_numbers_step2') }}" class="btn btn-secondary">Back to Exclusions</a>
+</div>
+{% endblock %}

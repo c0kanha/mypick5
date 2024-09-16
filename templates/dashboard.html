@@ -1,0 +1,37 @@
+<!-- templates/dashboard.html -->
+{% extends "base.html" %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-container">
+    <h1>Random Number Generator Dashboard</h1>
+    <div class="cards-container">
+        <div class="card">
+            <h2>Generate Numbers</h2>
+            <p>Create your personalized random numbers with exclusions and preferences.</p>
+            <a href="{{ url_for('generate_random_numbers') }}" class="btn btn-primary">Generate</a>
+        </div>
+        <div class="card">
+            <h2>Add Winning Number</h2>
+            <p>Input new winning numbers along with the date.</p>
+            <a href="{{ url_for('add_winning_number') }}" class="btn btn-primary">Add</a>
+        </div>
+        <div class="card">
+            <h2>Winning History</h2>
+            <p>View the history of all winning numbers.</p>
+            <a href="{{ url_for('winning_numbers_history') }}" class="btn btn-primary">History</a>
+        </div>
+        <div class="card">
+            <h2>Update Records</h2>
+            <p>Edit and manage your existing winning number records.</p>
+            <a href="{{ url_for('update_records') }}" class="btn btn-primary">Update</a>
+        </div>
+        <div class="card">
+            <h2>Statistics</h2>
+            <p>Analyze the frequency of number draws.</p>
+            <a href="{{ url_for('stats') }}" class="btn btn-primary">Statistics</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

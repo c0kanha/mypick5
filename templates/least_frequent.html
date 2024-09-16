@@ -1,0 +1,31 @@
+<!-- templates/least_frequent.html -->
+{% extends "base.html" %}
+
+{% block title %}Bottom 5 Least Frequent Numbers{% endblock %}
+
+{% block content %}
+<div class="result-container">
+    <h1>Bottom 5 Least Frequent Numbers</h1>
+    {% if least_numbers %}
+    <table>
+        <thead>
+            <tr>
+                <th>Number</th>
+                <th>Frequency</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for number, frequency in least_numbers %}
+            <tr>
+                <td>{{ number }}</td>
+                <td>{{ frequency }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No data available to display Bottom 5 Least Frequent Numbers.</p>
+    {% endif %}
+    <a href="{{ url_for('stats') }}" class="btn btn-secondary">Back to Statistics</a>
+</div>
+{% endblock %}

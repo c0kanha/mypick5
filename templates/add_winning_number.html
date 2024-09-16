@@ -1,0 +1,30 @@
+<!-- templates/add_winning_number.html -->
+{% extends "base.html" %}
+
+{% block title %}Add Winning Number{% endblock %}
+
+{% block content %}
+<div class="result-container">
+    <h1>Add Winning Number</h1>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div class="form-group">
+            {{ form.date.label }}
+            {{ form.date(class="form-control") }}
+            {% if form.date.errors %}
+                <span class="error">{{ form.date.errors[0] }}</span>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.numbers.label }}
+            {{ form.numbers(class="form-control") }}
+            <small>Enter numbers separated by commas (e.g., 5,12,23,34,45)</small>
+            {% if form.numbers.errors %}
+                <span class="error">{{ form.numbers.errors[0] }}</span>
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary">Add</button>
+        <a href="{{ url_for('dashboard') }}" class="btn btn-secondary">Back to Dashboard</a>
+    </form>
+</div>
+{% endblock %}

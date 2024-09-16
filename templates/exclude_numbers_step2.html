@@ -1,0 +1,32 @@
+<!-- templates/exclude_numbers_step2.html -->
+{% extends "base.html" %}
+
+{% block title %}Exclude Numbers from Last 3 Draws{% endblock %}
+
+{% block content %}
+<div class="result-container">
+    <h1>Exclude Numbers from Last 3 Draws</h1>
+    <form method="POST">
+        <fieldset>
+            <legend>Exclude These Numbers</legend>
+            {% for date, numbers in last_three_numbers.items() %}
+                <div class="date-section">
+                    <strong>{{ date }}</strong>
+                    <div class="checkbox-group">
+                        {% for num in numbers %}
+                            <label>
+                                <input type="checkbox" name="excluded_numbers_step2" value="{{ num }}">
+                                {{ num }}
+                            </label>
+                        {% endfor %}
+                    </div>
+                </div>
+                <br>
+            {% endfor %}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Next</button>
+    </form>
+    
+    <a href="{{ url_for('generate_random_numbers') }}" class="btn btn-secondary">Back to Generate</a>
+</div>
+{% endblock %}
