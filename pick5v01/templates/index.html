@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pick5 Winning Numbers</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #f4b400;
+            color: white;
+        }
+        td {
+            background-color: #fff;
+            color: black; /* Ensure the text is visible */
+        }
+    </style>
+</head>
+<body>
+    <h1>Pick5 Winning Numbers</h1>
+
+    <!-- Display Winning Numbers -->
+    <h2>Latest Winning Numbers</h2>
+    <table>
+        <tr>
+            <th>Draw Date</th>
+            <th>Number 1</th>
+            <th>Number 2</th>
+            <th>Number 3</th>
+            <th>Number 4</th>
+            <th>Number 5</th>
+            <th>Last Updated</th>
+            <th>Actions</th>
+        </tr>
+        {% for row in winning_numbers %}
+        <tr>
+            <td>{{ row['draw_date'] }}</td>
+            <td>{{ row['number1'] }}</td>
+            <td>{{ row['number2'] }}</td>
+            <td>{{ row['number3'] }}</td>
+            <td>{{ row['number4'] }}</td>
+            <td>{{ row['number5'] }}</td>
+            <td>{{ row['last_update_date_timestamp'] }}</td>
+            <td>
+                <form method="POST" action="/">
+                    <input type="hidden" name="draw_date" value="{{ row['draw_date'] }}">
+                    <input type="submit" value="Update">
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <!-- Add New Winning Numbers -->
+    <h2>Add New Winning Numbers</h2>
+    <form method="POST" action="/add">
+        <label for="draw_date">Draw Date (YYYY-MM-DD):</label>
+        <input type="date" id="draw_date" name="draw_date" required>
+        <br><br>
+        <label for="numbers">Numbers (space-separated):</label>
+        <input type="text" id="numbers" name="numbers" pattern="^\d{1,2}( \d{1,2}){4}$" title="Enter five space-separated numbers" required>
+        <br><br>
+        <input type="submit" value="Add Winning Numbers">
+    </form>
+
+    <!-- Update Existing Winning Numbers -->
+    {% if update_row %}
+    <h2>Update Winning Numbers for {{ update_row['draw_date'] }}</h2>
+    <form method="POST" action="/update">
+        <input type="hidden" name="original_draw_date" value="{{ update_row['draw_date'] }}">
+        <label for="new_draw_date">New Draw Date (YYYY-MM-DD):</label>
+        <input type="date" id="new_draw_date" name="new_draw_date" value="{{ update_row['draw_date'] }}" required>
+        <br><br>
+        <label for="new_numbers">New Numbers (space-separated):</label>
+        <input type="text" id="new_numbers" name="new_numbers" pattern="^\d{1,2}( \d{1,2}){4}$" title="Enter five space-separated numbers" value="{{ update_row['numbers'] }}" required>
+        <br><br>
+        <input type="submit" value="Update Numbers">
+    </form>
+    {% endif %}
+</body>
+</html>
+
